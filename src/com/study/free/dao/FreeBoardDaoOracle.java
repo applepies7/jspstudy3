@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.study.free.vo.FreeBoardVO;
+import com.study.free.vo.FreeSearchVO;
 
 public class FreeBoardDaoOracle implements IFreeBoardDao {
 
 	@Override
-	public List<FreeBoardVO> getBoardList() throws SQLException {
+	public List<FreeBoardVO> getBoardList(FreeSearchVO searchVO) throws SQLException {
 		Connection conn = null; // 커넥션 티켓
 		PreparedStatement pstmt = null; // SQL선언문
 		ResultSet rs = null; // 질의 결과
@@ -22,6 +23,9 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 		try {
 
 			conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:study");
+			sb.append("	select	 *                     ");
+			sb.append("	from (select a.*, ROWNUM rnum  ");
+			sb.append("			from (                 ");
 			sb.append("	select	 a.bo_num, ");
 			sb.append("   a.bo_category,  ");
 			sb.append("   b.comm_nm as cat_nm, ");
@@ -32,10 +36,21 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 			sb.append("  FROM free_board a left join comm_code b	 ");
 			sb.append("    on( a.bo_category = b.comm_cd)	 ");
 			sb.append("  where bo_del_yn = 'N'  ");
-			sb.append("  ORDER BY bo_num DESC  ");
+			sb.append("  order by bo_num desc  ");
+			
+			sb.append("  )a                          ");
+			sb.append("  where rownum <= ?           ");
+			sb.append("  )b                          ");
+			sb.append("  where rnum between ? and ?  ");
+			
+		
 
 			System.out.println(sb.toString().replaceAll("\\s{2,}", ""));
 			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, searchVO.getLastRecordIndex());
+			pstmt.setInt(2, searchVO.getFirstRecordIndex());
+			pstmt.setInt(3, searchVO.getLastRecordIndex());
+			
 			rs = pstmt.executeQuery();
 			List<FreeBoardVO> list = new ArrayList<FreeBoardVO>();
 			FreeBoardVO board = null;
@@ -49,6 +64,7 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 				board.setBoHit(rs.getInt("bo_hit"));
 				list.add(board);
 			}
+			
 			return list;
 
 		} catch (Exception e) {
@@ -368,6 +384,58 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 				}
 
 		}
+	}
+
+	@Override
+	public int getBoardCount(FreeSearchVO freeSearchVO) throws SQLException {
+		Connection conn = null; // 커넥션 티켓
+		PreparedStatement pstmt = null; // SQL선언문
+		ResultSet rs = null; // 질의 결과
+		StringBuilder sb = new StringBuilder();
+
+		try {
+
+			conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:study");
+			sb.append("	select	 count(*) ");
+			sb.append("   from   free_board ");
+			sb.append("  where bo_del_yn = 'N'  ");
+			
+			System.out.println(sb.toString().replaceAll("\\s{2,}", ""));
+			pstmt = conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+			int cnt = 0;
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+
+			return cnt;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (Exception e) {
+				}
+
+		}
+
+		
+		
+
 	}
 
 }
