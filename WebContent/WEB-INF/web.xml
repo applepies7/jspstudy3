@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>Study</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		
+	</welcome-file-list>
+
+	<!-- 작성한 서블릿 등록 -->
+	
+	<servlet>
+		<servlet-name>loader</servlet-name>
+		<servlet-class>com.study.servlet.DriverLoader</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- 
+	
+	<servlet>
+		<servlet-name>appInit</servlet-name>
+		<servlet-class>com.study.servlet.AppInitLoader</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+
+ -->
+	<!-- url-pattern
+	          확장자 매핑 : *.do, *.nhn *와 사용할 확장자로 매핑
+	          경로 매핑 : /시작해서 /*끝나는 매핑 "/admin/"
+	          완전 메핑 : 완전한 경로 지정 "/member/list.do"
+	          기본 서블릿 매핑 : /로 만 지정(다른서블릿 매핑을 제외하고 모든 요청 처리)
+	                           (JSP를 제외하고 모든 요청 처리)
+	           그 외는 안됩니다.
+	     "/admin/*.nhn" : 확장자 + 경로 매핑은 안되요
+	            -->
+	            
+
+
+</web-app>

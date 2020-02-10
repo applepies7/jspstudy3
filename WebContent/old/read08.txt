@@ -1,0 +1,17 @@
+
+속성 영역
+
+서블릿 : 
+init(),
+servive() => doGet, doPost, doPut....
+destory() 
+
+init() 에서 application 을 구해서 속성에 DB정보
+
+AppInitLoder
+
+<jsp: /> 로 시작하는 액션태그는 실제 공공기관 실무에서는 거의 사용치 않음.
+
+템플릿 jsp
+
+스니펫 또는 템플릿에서 

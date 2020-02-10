@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>Study</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+<context-param>
+<param-name>DB_URL</param-name>
+<param-value>
+jdbc:oracle:thin:@127.0.0.1:1521:xe
+</param-value>
+</context-param>
+
+<!--common.jsp가 08폴더에 있는 파일에 자동으로 앞에 붙음.  -->
+<jsp-config>
+<jsp-property-group>
+<url-pattern>/08/*</url-pattern>
+<include-prelude>/inc/common_var.jsp</include-prelude>
+</jsp-property-group>
+</jsp-config>
+ 
+	<!-- 작성한 서블릿 등록 -->
+	<servlet>
+		<servlet-name>sum</servlet-name>
+		<servlet-class>com.study.servlet.SumServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>appInit</servlet-name>
+		<servlet-class>com.study.servlet.AppInitLoader</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<!-- 클라이언트 요청과 서블릿 매핑 -->
+	<servlet-mapping>
+		<servlet-name>sum</servlet-name>
+		<url-pattern>*.500</url-pattern>
+		<!-- <url-pattern>/member/*.soo</url-pattern> 에러-->
+	</servlet-mapping>
+
+
+
+	<!-- url-pattern
+	          확장자 매핑 : *.do, *.nhn *와 사용할 확장자로 매핑
+	          경로 매핑 : /시작해서 /*끝나는 매핑 "/admin/"
+	          완전 메핑 : 완전한 경로 지정 "/member/list.do"
+	          기본 서블릿 매핑 : /로 만 지정(다른서블릿 매핑을 제외하고 모든 요청 처리)
+	                           (JSP를 제외하고 모든 요청 처리)
+	           그 외는 안됩니다.
+	     "/admin/*.nhn" : 확장자 + 경로 매핑은 안되요
+	            -->
+	            
+
+<!-- <error-page>
+<error-code>500</error-code>
+<location>/error/500.jsp</location>
+</error-page>	            
+
+ <error-page>
+<error-code>404</error-code>
+<location>/error/404.jsp</location>
+</error-page>	            
+ --><!-- 
+
+<error-page>
+<exception-type>java.lang.RuntimeException</exception-type>
+<location>/error/errorRuntime.jsp</location>
+</error-page>	            
+
+<error-page>
+<exception-type>java.io.IOException</exception-type>
+<location>/error/errorIO.jsp</location>
+</error-page>	            
+-->
+</web-app>

@@ -1,0 +1,12 @@
+#free_1st.txt
+
+24일차
+
+freeView.jsp
+> 수정하기 -> freeEdit.jsp
+
+freeEdit.jsp freeForm 복사 + 내용 freeView
+
+freeregist.jsp복사하여 구
+freemodify
+freedelete

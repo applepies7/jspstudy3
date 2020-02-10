@@ -1,0 +1,5 @@
+#read20.txt
+
+com.study.common.dao.ICommCodeDao
+com.study.common.dao.CommonCodeDaoOracle
+list<CodeCO> getCodeListByParent(StringCode);

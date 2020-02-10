@@ -1,0 +1,12 @@
+read16.txt
+
+
+PreparedStatement 사용햐야 하는 이유
+1. SQL injection 예방
+2. 값변환 자동으로 해줌 작은 따옴표를 변환할 필요 없음
+3. 코드가 간결해짐
+
+
+one c one j
+many c one j
+many c many j

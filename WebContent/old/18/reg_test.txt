@@ -1,0 +1,40 @@
+
+#reg_test.txt
+
+사랑해요 malja 언제나 당신을 사랑해요 nolja
+malja, sunja, nolja, milkis 사랑해요
+nolja, .... sunja.... haha .... 
+
+
+유효성 검증
+문자열 교체
+
+--아이디 (5,10글자 사이 사용문자 알파벳 숫자 언더바)
+malja1004
+malja 1004
+haja_25
+nolja@daum
+밀키스love
+
+패턴 ^[a-zA-Z0-9_]{5,10}$
+
+--주민번호 앞자리 찾기
+345678907890 781225 ㅁㄴㅇㅁㄴㅇㅁ ㅁ25619480
+
+---펄 표기법 
+\w = [a-zA-Z0-9_]
+\W = [^a-zA-Z0-9_]
+\d = [0-9]
+\D = [^0-9]
+\s = 공백문자
+
+\b = 단어경계,
+\B = 단어의 비경계
+
+
+
+
+
+
+
+windows95,windows98,in sin xxxxx

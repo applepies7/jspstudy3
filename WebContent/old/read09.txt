@@ -1,0 +1,29 @@
+
+
+<jsp: 액션태그
+
+<jsp:include /> : 일부화면영역을 호출 결과를 받아서 사용
+<%@ include /> : 공통 사용하는 변수, 상수
+<jsp:include /> : 흐름을 해당 페이지로 호출 하고 결과가 끝나면 메인으로 복귀
+<jsp:forward /> : 메인에서 흐름을 해당 페이지로 변경
+				  메인에서 했던 스트림은 비우고 새로운 페이지에서 스트림생성
+
+<jsp:param /> : 호출하는 페이지에 파라미터를 설정할 수 있음 받는쪽에서 getParameter()로 접근가능
+				
+
+<jsp:useBean />, <jsp:getProperty />, jsp:setProperty?> : 10일차 수업 예정
+
+액션태그는 라이브러리/프레임워크 쓰는 현업에서는 사용치 않음
+뷰단 프레임워크에는 : 사이트메시 타일즈
+
+
+
+
+
+select 'private '||decode(USER_TAB_COLS.DATA_TYPE,'NUMBER', 'int mem' , 'String mem')
+           ||initcap(replace((lower(USER_TAB_COLS.COLUMN_NAME)),'mem_',''))||
+       '  //'||USER_COL_COMMENTS.COMMENTS
+from USER_COL_COMMENTS,USER_TAB_COLS
+where USER_COL_COMMENTS.TABLE_NAME = 'MEMBER'
+and USER_COL_COMMENTS.TABLE_NAME = USER_TAB_COLS.TABLE_NAME
+and USER_COL_COMMENTS.COLUMN_NAME = USER_TAB_COLS.COLUMN_NAME;

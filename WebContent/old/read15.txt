@@ -1,0 +1,32 @@
+read15.txt
+
+<c:url />
+<c:out />
+<fmt:formatNumber>
+
+
+14장 DB
+
+ODBC (Open DataBase Connectivity) -> java용  -> JDBC
+
+connection Api : 연결을 위한 인터페이스 구현은 각 DB벤더에서
+statement : 쿼리 실행
+result Set : 결과 
+
+자바 프로젝트 할때 외부 JAR 추가할 수 있는곳
+
+1. $java_home/lib/ext/jar에 추가 (전역) 
+	단점 : 다른버전 사용이 어려움. 특별히 서버가 아닌 이상 사용하지 않음.
+
+2.해당 서버의 라이브러리 폴더에 추가
+	톰캣 : $catalina_home/lib에 추가
+	단점 웹 어플리케이션 별로 다른 버전을 사용하기 어려움 
+	특별히 서버가 아닌 이상 사용하지 않음
+3. 해당 웹 어플리케이션의 lib에 추가
+	단점 : 개발할때 찾아서 넣어야 함.
+	
+
+DB가 서비스중일것
+getConnection("jdbc:oracle:thin:@192.168.20.54:1521:xe", "java", "oracle") 이거 잘 쓸것
+쿼리에 세미콜론을 넣으면 안됨.	 executeQuery("select * from member")
+	

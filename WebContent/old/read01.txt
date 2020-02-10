@@ -1,0 +1,63 @@
+검색
+
+1 protocol
+통신규약/규칙
+
+2 http 
+hyper text transfer protocol
+
+3 ftp 
+file transfer protocol
+
+4 telnet
+로컬 연결 네트워크 프로토콜
+
+
+5 c/s: client, server
+
+
+
+6 port:
+
+0번 ~ 1023번 : 잘 알려진 포트 ( well-known port ) 국제도메인관리기구 통제
+
+FTP - 20, 21 (TCP), SSH - 22 (TCP), 텔넷 - 23 (TCP), HTTP - 80 (TCP), HTTPS - 443 (TCP)
+
+SMTP - 25 (TCP), DNS - 53 (TCP/UDP), DHCP - 67 (UDP), RDP - 3389 (TCP/UDP)
+
+1024번 ~ 49151번 : 등록된 포트 ( registered port ) 국제도메인관리기구 등록
+MySQL - 3306
+Oracle - 1521, 1522 
+MS-SQL - 1433, 1434 
+PostgreSQL - 5432
+
+49152번 ~ 65535번 : 동적 포트 ( dynamic port )
+알아서 쓰는...
+
+7 as (application server)
+Server -> AS -> WAS
+
+CGI
+
+web server -> apache
+was server => tomcat , weblogic, ibm websphere, tmax jeus
+
+localhost
+127.0.0.1
+-pc 이름
+자기 ip
+
+이클립스 최적화
+ -------------------- 하드웨어 설정
+-Xverify:none
+-XX:+UseParallelGC
+-XX:-UseConcMarkSweepGC
+-XX:PermSize=64M
+-XX:MaxPermSize=512M
+-XX:MaxNewSize=512M
+-XX:NewSize=128M
+-Xms512m
+-Xmx1024m
+ 
+ 
+

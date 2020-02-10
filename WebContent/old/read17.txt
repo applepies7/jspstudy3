@@ -1,0 +1,19 @@
+
+read17.txt
+
+17일 폴더
+10 regist.jsp
+memberFrom.jsp
+->memberRegist.jsp
+
+
+커넥션을 구하는 방법
+
+1. DriverManager.getConnection() : 가장 기초적인 방법
+2. Connection Pool을 통해서 받는 DBCP C3P0 하카리CP
+3. JEE JNDI로 접근해서 받는 방법 j
+
+member
+기존 쿼리 빌더로 처리 하도록 변경
+아이디 이름 직업 취미 hp 마일리지
+

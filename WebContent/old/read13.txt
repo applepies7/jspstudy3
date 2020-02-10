@@ -1,0 +1,14 @@
+
+
+
+11,12 장 EL, JSTL
+
+EL의 기능 
+
+속성에 있는 객체표현
+수치 관계 논리 연산 가능
+자바 메서드 호출 가능 (JSP2.2)
+EL자체 내장 객체 존재 (param,pageContext,cookie)
+람다식 사용가능 (JDK8,JSP2.3)
+스트림API사용 가능 (JDK8,JSP2.3)
+자바 static method호출 (JSP2.3)
