@@ -79,25 +79,24 @@
 					<td>${vo.boHit }</td>
 				</tr>
 			</c:forEach>
+			<p>${search.currentPageNo}</p>
 		</table>
 
 		<nav>
-				<p>
-					<strong>목록</strong>
-				</p>
-				<ul class="pagination">
-				<li class="page-item">
 				
-				<a class="page-link" href="${serch.currcurrentPageNo-1  }">Previous</a></li>
+				<ul class="pagination">
+				<li class='page-item ${search.currentPageNo eq 1 ? "disabled" :"" }'>
+					
+				<a class="page-link" href="freeList.jsp?currentPageNo=${search.currentPageNo == 1 ? search.currentPageNo : search.currentPageNo - 1  }"><span class="page-link">Previous</span></a></li>
 					
 					
-					<c:forEach var="i" begin="${search.firstPageNoOnPageList }" end="${search.lastPageNoOnPageList }">
-					<c:if test="${serch.currcurrentPageNo eq i }">
+					<c:forEach var="i" begin="${search.firstPageNoOnPageList }" end="${search.totalPageCount }">
+					<c:if test="${search.currentPageNo eq i }">
 					
-						<li class="page-item"><a class="page-link"
-							href="#">${i }</a>
+						<li class="page-item active"><a class="page-link"
+							href="#"><span class="page-link">${i }<span class="sr-only">(current)</span></span></a>
 					</c:if>
-					<c:if test="${serch.currcurrentPageNo ne i }">
+					<c:if test="${search.currentPageNo ne i }">
 					
 						<li class="page-item"><a class="page-link"
 							href="freeList.jsp?currentPageNo=${i }">${i }</a>
@@ -105,7 +104,7 @@
 					</c:forEach>
 					
 					
-					<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					<li class='page-item ${search.currentPageNo eq search.totalPageCount ? "disabled" :"" }'><a class="page-link" href="freeList.jsp?currentPageNo=${search.currentPageNo eq search.totalPageCount ? search.currentPageNo : search.currentPageNo + 1  }">Next</a></li>
 				</ul>
 
 		</nav>	
