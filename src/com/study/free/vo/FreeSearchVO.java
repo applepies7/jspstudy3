@@ -1,5 +1,8 @@
 package com.study.free.vo;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.study.common.vo.PagingVO;
 
 public class FreeSearchVO extends PagingVO {
@@ -63,8 +66,7 @@ public class FreeSearchVO extends PagingVO {
 
 	@Override
 	public String toString() {
-		return "FreeSearchVO [searchCategory=" + searchCategory + ", searchType=" + searchType + ", searchWord="
-				+ searchWord + "]" + "toString()=" + super.toString();
+		return ToStringBuilder.reflectionToString(this,ToStringStyle.JSON_STYLE);
 	}
 
 

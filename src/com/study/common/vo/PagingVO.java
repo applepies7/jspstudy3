@@ -32,7 +32,7 @@ public class PagingVO {
 		firstPageNoOnPageList =((currentPageNo-1)/pageSize)*pageSize + 1;
 		lastPageNoOnPageList = firstPageNoOnPageList+pageSize-1;
 					
-		if(lastPageNoOnPageList>totalRecordCount)lastPageNoOnPageList = totalPageCount;
+		if(lastPageNoOnPageList>totalPageCount)lastPageNoOnPageList = totalPageCount;
 
 	}
 

@@ -8,13 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.study.free.vo.FreeBoardVO;
 import com.study.free.vo.FreeSearchVO;
 
 public class FreeBoardDaoOracle implements IFreeBoardDao {
 
 	@Override
-	public List<FreeBoardVO> getBoardList(FreeSearchVO searchVO) throws SQLException {
+	public List<FreeBoardVO> getBoardList(FreeSearchVO freeSearchVO) throws SQLException {
 		Connection conn = null; // 커넥션 티켓
 		PreparedStatement pstmt = null; // SQL선언문
 		ResultSet rs = null; // 질의 결과
@@ -36,21 +38,46 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 			sb.append("  FROM free_board a left join comm_code b	 ");
 			sb.append("    on( a.bo_category = b.comm_cd)	 ");
 			sb.append("  where bo_del_yn = 'N'  ");
+			if (StringUtils.isNotBlank(freeSearchVO.getSearchWord())
+					&& StringUtils.isNotBlank(freeSearchVO.getSearchType())) {
+				switch (freeSearchVO.getSearchType()) {
+				case "T":
+					sb.append("  and bo_title like '%'|| ? ||'%'  ");
+					break;
+				case "W":
+					sb.append("  and bo_writer like '%'|| ? ||'%'  ");
+					break;
+				case "C":
+					sb.append("  and bo_content like '%'|| ? ||'%'  ");
+					break;
+				}
+			}
+			if (StringUtils.isNotBlank(freeSearchVO.getSearchCategory())) {
+				sb.append("  and bo_category = ?  ");
+			}
 			sb.append("  order by bo_num desc  ");
-			
 			sb.append("  )a                          ");
 			sb.append("  where rownum <= ?           ");
 			sb.append("  )b                          ");
 			sb.append("  where rnum between ? and ?  ");
-			
-		
 
 			System.out.println(sb.toString().replaceAll("\\s{2,}", ""));
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, searchVO.getLastRecordIndex());
-			pstmt.setInt(2, searchVO.getFirstRecordIndex());
-			pstmt.setInt(3, searchVO.getLastRecordIndex());
-			
+			int idx = 1;
+
+			if (StringUtils.isNotBlank(freeSearchVO.getSearchWord())
+					&& StringUtils.isNotBlank(freeSearchVO.getSearchType())) {
+				pstmt.setString(idx++, freeSearchVO.getSearchWord());
+			}
+
+			if (StringUtils.isNotBlank(freeSearchVO.getSearchCategory())) {
+				pstmt.setString(idx++, freeSearchVO.getSearchCategory());
+			}
+
+			pstmt.setInt(idx++, freeSearchVO.getLastRecordIndex());
+			pstmt.setInt(idx++, freeSearchVO.getFirstRecordIndex());
+			pstmt.setInt(idx++, freeSearchVO.getLastRecordIndex());
+
 			rs = pstmt.executeQuery();
 			List<FreeBoardVO> list = new ArrayList<FreeBoardVO>();
 			FreeBoardVO board = null;
@@ -64,7 +91,7 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 				board.setBoHit(rs.getInt("bo_hit"));
 				list.add(board);
 			}
-			
+
 			return list;
 
 		} catch (Exception e) {
@@ -251,17 +278,15 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 			System.out.println(sb.toString().replaceAll("\\s{2,}", ""));
 			pstmt = conn.prepareStatement(sb.toString());
 			int idx = 1;
-			
-			pstmt.setString(idx++,board.getBoTitle());
-			pstmt.setString(idx++,board.getBoCategory());
-			pstmt.setString(idx++,board.getBoWriter());
-			pstmt.setString(idx++,board.getBoPass());
-			pstmt.setString(idx++,board.getBoContent());
-			pstmt.setInt(idx++,board.getBoNum());
-			pstmt.setString(idx++,board.getBoPass());
-			
-			
-			
+
+			pstmt.setString(idx++, board.getBoTitle());
+			pstmt.setString(idx++, board.getBoCategory());
+			pstmt.setString(idx++, board.getBoWriter());
+			pstmt.setString(idx++, board.getBoPass());
+			pstmt.setString(idx++, board.getBoContent());
+			pstmt.setInt(idx++, board.getBoNum());
+			pstmt.setString(idx++, board.getBoPass());
+
 			int cnt = pstmt.executeUpdate();
 
 			return cnt;
@@ -305,13 +330,13 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 			sb.append("    bo_del_yn    = 'Y'   ");
 			sb.append(" where bo_num = ? ");
 			sb.append("  and bo_pass = ? ");
-			
+
 			System.out.println(sb.toString().replaceAll("\\s{2,}", ""));
 			pstmt = conn.prepareStatement(sb.toString());
 			int idx = 1;
-			
-			pstmt.setInt(idx++,board.getBoNum());
-			pstmt.setString(idx++,board.getBoPass());
+
+			pstmt.setInt(idx++, board.getBoNum());
+			pstmt.setString(idx++, board.getBoPass());
 
 			int cnt = pstmt.executeUpdate();
 
@@ -399,12 +424,41 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 			sb.append("	select	 count(*) ");
 			sb.append("   from   free_board ");
 			sb.append("  where bo_del_yn = 'N'  ");
-			
+//			if (freeSearchVO.getSearchWord() != null && !freeSearchVO.getSearchWord().isEmpty()) {
+			if (StringUtils.isNotBlank(freeSearchVO.getSearchWord())
+					&& StringUtils.isNotBlank(freeSearchVO.getSearchWord())) {
+				switch (freeSearchVO.getSearchType()) {
+				case "T":
+					sb.append("  and bo_title like '%'|| ? ||'%'  ");
+					break;
+				case "W":
+					sb.append("  and bo_writer like '%'|| ? ||'%'  ");
+					break;
+				case "C":
+					sb.append("  and bo_content like '%'|| ? ||'%'  ");
+					break;
+				}
+			}
+			if (StringUtils.isNotBlank(freeSearchVO.getSearchCategory())) {
+				sb.append("  and bo_category = ?  ");
+			}
+
 			System.out.println(sb.toString().replaceAll("\\s{2,}", ""));
 			pstmt = conn.prepareStatement(sb.toString());
+			int idx = 1;
+
+			if (StringUtils.isNotBlank(freeSearchVO.getSearchWord())
+					&& StringUtils.isNotBlank(freeSearchVO.getSearchWord())) {
+				pstmt.setString(idx++, freeSearchVO.getSearchWord());
+			}
+
+			if (StringUtils.isNotBlank(freeSearchVO.getSearchCategory())) {
+				pstmt.setString(idx++, freeSearchVO.getSearchCategory());
+			}
+
 			rs = pstmt.executeQuery();
 			int cnt = 0;
-			if(rs.next()) {
+			if (rs.next()) {
 				cnt = rs.getInt(1);
 			}
 
@@ -432,9 +486,6 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 				}
 
 		}
-
-		
-		
 
 	}
 
