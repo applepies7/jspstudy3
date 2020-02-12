@@ -16,7 +16,7 @@ import com.study.free.vo.FreeSearchVO;
 public class FreeBoardDaoOracle implements IFreeBoardDao {
 
 	@Override
-	public List<FreeBoardVO> getBoardList(FreeSearchVO freeSearchVO) throws SQLException {
+	public List<FreeBoardVO> getBoardList(FreeSearchVO searchVO) throws SQLException {
 		Connection conn = null; // 커넥션 티켓
 		PreparedStatement pstmt = null; // SQL선언문
 		ResultSet rs = null; // 질의 결과
@@ -38,9 +38,9 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 			sb.append("  FROM free_board a left join comm_code b	 ");
 			sb.append("    on( a.bo_category = b.comm_cd)	 ");
 			sb.append("  where bo_del_yn = 'N'  ");
-			if (StringUtils.isNotBlank(freeSearchVO.getSearchWord())
-					&& StringUtils.isNotBlank(freeSearchVO.getSearchType())) {
-				switch (freeSearchVO.getSearchType()) {
+			if (StringUtils.isNotBlank(searchVO.getSearchWord())
+					&& StringUtils.isNotBlank(searchVO.getSearchType())) {
+				switch (searchVO.getSearchType()) {
 				case "T":
 					sb.append("  and bo_title like '%'|| ? ||'%'  ");
 					break;
@@ -52,7 +52,7 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 					break;
 				}
 			}
-			if (StringUtils.isNotBlank(freeSearchVO.getSearchCategory())) {
+			if (StringUtils.isNotBlank(searchVO.getSearchCategory())) {
 				sb.append("  and bo_category = ?  ");
 			}
 			sb.append("  order by bo_num desc  ");
@@ -65,18 +65,18 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 			pstmt = conn.prepareStatement(sb.toString());
 			int idx = 1;
 
-			if (StringUtils.isNotBlank(freeSearchVO.getSearchWord())
-					&& StringUtils.isNotBlank(freeSearchVO.getSearchType())) {
-				pstmt.setString(idx++, freeSearchVO.getSearchWord());
+			if (StringUtils.isNotBlank(searchVO.getSearchWord())
+					&& StringUtils.isNotBlank(searchVO.getSearchType())) {
+				pstmt.setString(idx++, searchVO.getSearchWord());
 			}
 
-			if (StringUtils.isNotBlank(freeSearchVO.getSearchCategory())) {
-				pstmt.setString(idx++, freeSearchVO.getSearchCategory());
+			if (StringUtils.isNotBlank(searchVO.getSearchCategory())) {
+				pstmt.setString(idx++, searchVO.getSearchCategory());
 			}
 
-			pstmt.setInt(idx++, freeSearchVO.getLastRecordIndex());
-			pstmt.setInt(idx++, freeSearchVO.getFirstRecordIndex());
-			pstmt.setInt(idx++, freeSearchVO.getLastRecordIndex());
+			pstmt.setInt(idx++, searchVO.getLastRecordIndex());
+			pstmt.setInt(idx++, searchVO.getFirstRecordIndex());
+			pstmt.setInt(idx++, searchVO.getLastRecordIndex());
 
 			rs = pstmt.executeQuery();
 			List<FreeBoardVO> list = new ArrayList<FreeBoardVO>();
@@ -412,7 +412,7 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 	}
 
 	@Override
-	public int getBoardCount(FreeSearchVO freeSearchVO) throws SQLException {
+	public int getBoardCount(FreeSearchVO searchVO) throws SQLException {
 		Connection conn = null; // 커넥션 티켓
 		PreparedStatement pstmt = null; // SQL선언문
 		ResultSet rs = null; // 질의 결과
@@ -424,10 +424,10 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 			sb.append("	select	 count(*) ");
 			sb.append("   from   free_board ");
 			sb.append("  where bo_del_yn = 'N'  ");
-//			if (freeSearchVO.getSearchWord() != null && !freeSearchVO.getSearchWord().isEmpty()) {
-			if (StringUtils.isNotBlank(freeSearchVO.getSearchWord())
-					&& StringUtils.isNotBlank(freeSearchVO.getSearchWord())) {
-				switch (freeSearchVO.getSearchType()) {
+//			if (searchVO.getSearchWord() != null && !searchVO.getSearchWord().isEmpty()) {
+			if (StringUtils.isNotBlank(searchVO.getSearchWord())
+					&& StringUtils.isNotBlank(searchVO.getSearchWord())) {
+				switch (searchVO.getSearchType()) {
 				case "T":
 					sb.append("  and bo_title like '%'|| ? ||'%'  ");
 					break;
@@ -439,7 +439,7 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 					break;
 				}
 			}
-			if (StringUtils.isNotBlank(freeSearchVO.getSearchCategory())) {
+			if (StringUtils.isNotBlank(searchVO.getSearchCategory())) {
 				sb.append("  and bo_category = ?  ");
 			}
 
@@ -447,13 +447,13 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 			pstmt = conn.prepareStatement(sb.toString());
 			int idx = 1;
 
-			if (StringUtils.isNotBlank(freeSearchVO.getSearchWord())
-					&& StringUtils.isNotBlank(freeSearchVO.getSearchWord())) {
-				pstmt.setString(idx++, freeSearchVO.getSearchWord());
+			if (StringUtils.isNotBlank(searchVO.getSearchWord())
+					&& StringUtils.isNotBlank(searchVO.getSearchWord())) {
+				pstmt.setString(idx++, searchVO.getSearchWord());
 			}
 
-			if (StringUtils.isNotBlank(freeSearchVO.getSearchCategory())) {
-				pstmt.setString(idx++, freeSearchVO.getSearchCategory());
+			if (StringUtils.isNotBlank(searchVO.getSearchCategory())) {
+				pstmt.setString(idx++, searchVO.getSearchCategory());
 			}
 
 			rs = pstmt.executeQuery();

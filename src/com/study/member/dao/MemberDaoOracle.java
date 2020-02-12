@@ -8,12 +8,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.study.member.vo.MemberSearchVO;
 import com.study.member.vo.MemberVO;
 
 public class MemberDaoOracle implements IMemberDao {
 
+	
+	
 	@Override
-	public List<MemberVO> getMemberList() throws SQLException {
+	public int getMemberCount(MemberSearchVO searchVO) throws SQLException {
+
 		Connection conn = null; // 커넥션 티켓
 		PreparedStatement pstmt = null; // SQL선언문
 		ResultSet rs = null; // 질의 결과
@@ -22,7 +28,94 @@ public class MemberDaoOracle implements IMemberDao {
 		try {
 
 			conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:study");
+			sb.append("	select	 count(*) ");
+			sb.append("   from   member ");
+			sb.append("  where mem_del_yn = 'N'  ");
+//			if (freeSearchVO.getSearchWord() != null && !freeSearchVO.getSearchWord().isEmpty()) {
+			if (StringUtils.isNotBlank(searchVO.getSearchWord())
+					&& StringUtils.isNotBlank(searchVO.getSearchWord())) {
+				switch (searchVO.getSearchType()) {
+				case "ID":
+					sb.append("  and mem_id like '%'|| ? ||'%'  ");
+					break;
+				case "W":
+					sb.append("  and mem_name like '%'|| ? ||'%'  ");
+					break;
+				case "ADD":
+					sb.append("  and (mem_add1 like '%'|| ? ||'%' or mem_add2 like '%'|| ? ||'%'  ");
+					break;
+				}
+			}
+			if (StringUtils.isNotBlank(searchVO.getSearchJob())) {
+				sb.append("  and mem_job = ?  ");
+			}
 
+			System.out.println(sb.toString().replaceAll("\\s{2,}", ""));
+			pstmt = conn.prepareStatement(sb.toString());
+			int idx = 1;
+
+			if (StringUtils.isNotBlank(searchVO.getSearchWord())
+					&& StringUtils.isNotBlank(searchVO.getSearchWord()))		{
+				if(searchVO.getSearchType().equals("ADD")) {
+						pstmt.setString(idx++, searchVO.getSearchWord());
+						pstmt.setString(idx++, searchVO.getSearchWord());
+				}
+				pstmt.setString(idx++, searchVO.getSearchWord());
+				
+			}
+
+			if (StringUtils.isNotBlank(searchVO.getSearchJob())) {
+				pstmt.setString(idx++, searchVO.getSearchJob());
+			}
+
+			rs = pstmt.executeQuery();
+			int cnt = 0;
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+
+			return cnt;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (Exception e) {
+				}
+
+		}
+
+	}
+
+	
+	
+	@Override
+	public List<MemberVO> getMemberList(MemberSearchVO searchVO) throws SQLException {
+		Connection conn = null; // 커넥션 티켓
+		PreparedStatement pstmt = null; // SQL선언문
+		ResultSet rs = null; // 질의 결과
+		StringBuilder sb = new StringBuilder();
+
+		try {
+
+			conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:study");
+			sb.append(" select *								");
+           sb.append("  from( select a.*, ROWNUM rnum   ");
+           sb.append("  from(                            ");
 			sb.append(" select member.mem_id	");
 			sb.append("	, member.mem_name		");
 			sb.append("	, member.mem_add1		");
@@ -35,9 +128,56 @@ public class MemberDaoOracle implements IMemberDao {
 			sb.append("where member.mem_like = comm_code.comm_cd	");
 			sb.append("and member.mem_job = c.comm_cd	");
 			sb.append("  and mem_del_yn = 'N' ");
+			if (StringUtils.isNotBlank(searchVO.getSearchWord())
+					&& StringUtils.isNotBlank(searchVO.getSearchWord())) {
+				switch (searchVO.getSearchType()) {
+				case "ID":
+					sb.append("  and mem_id like '%'|| ? ||'%'  ");
+					break;
+				case "W":
+					sb.append("  and mem_name like '%'|| ? ||'%'  ");
+					break;
+				case "ADD":
+					sb.append("  and (mem_add1 like '%'|| ? ||'%' or mem_add2 like '%'|| ? ||'%'  ");
+					break;
+
+				}
+			}
+	
+			if (StringUtils.isNotBlank(searchVO.getSearchJob())) {
+				sb.append("  and mem_job = ?  ");
+			}
+			
 			sb.append("ORDER BY mem_id ASC ");
+            sb.append(" )a                         ");
+            sb.append(" where rownum <= ?          ");
+            sb.append(" )b                         ");
+            sb.append(" where rnum between ? and ? ");
+                
+			
+			
+			
+			
 			System.out.println(sb.toString());
 			pstmt = conn.prepareStatement(sb.toString());
+			int idx = 1;
+			if (StringUtils.isNotBlank(searchVO.getSearchWord())
+					&& StringUtils.isNotBlank(searchVO.getSearchWord()))		{
+				if(searchVO.getSearchType().equals("ADD")) {
+						pstmt.setString(idx++, searchVO.getSearchWord());
+						pstmt.setString(idx++, searchVO.getSearchWord());
+				}
+				pstmt.setString(idx++, searchVO.getSearchWord());
+				
+			}
+
+			if (StringUtils.isNotBlank(searchVO.getSearchJob())) {
+				pstmt.setString(idx++, searchVO.getSearchJob());
+			}
+			pstmt.setInt(idx++, searchVO.getLastRecordIndex());
+			pstmt.setInt(idx++, searchVO.getFirstRecordIndex());
+			pstmt.setInt(idx++, searchVO.getLastRecordIndex());
+
 			rs = pstmt.executeQuery();
 			List<MemberVO> list = new ArrayList<MemberVO>();
 			MemberVO member = null;
@@ -47,6 +187,7 @@ public class MemberDaoOracle implements IMemberDao {
 				member.setMemName(rs.getString("mem_name"));
 				member.setMemAdd1(rs.getString("mem_add1"));
 				member.setMemAdd2(rs.getString("mem_add2"));
+				member.setMemJob(rs.getString("mem_job"));
 				member.setMemJobnm(rs.getString("mem_jobnm"));
 				member.setMemMileage(rs.getInt("mem_mileage"));
 				list.add(member);
@@ -359,4 +500,5 @@ public class MemberDaoOracle implements IMemberDao {
 
 	}
 
+	
 }

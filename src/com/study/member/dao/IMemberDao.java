@@ -3,6 +3,7 @@ package com.study.member.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.study.member.vo.MemberSearchVO;
 import com.study.member.vo.MemberVO;
 
 public interface IMemberDao {
@@ -13,7 +14,7 @@ public interface IMemberDao {
 	 * @return 회원목록
 	 * @throws SQLException
 	*/	
-	public List<MemberVO> getMemberList() throws SQLException ;
+	public List<MemberVO> getMemberList(MemberSearchVO searchVO) throws SQLException ;
 	
 	/*
 	 * 회원 조회<br>
@@ -53,5 +54,5 @@ public interface IMemberDao {
 	 */
 	public int deleteMember(MemberVO member) throws SQLException;
 	
-	
+	public int getMemberCount(MemberSearchVO searchVO) throws SQLException;
 }
