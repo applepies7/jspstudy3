@@ -20,13 +20,13 @@
 				<li class="active"><a href="#">Home</a></li>
 				<li><a href="#about">About</a></li>
 				<li><a
-					href="<%=request.getContextPath()%>/member/memberList.jsp">회원조회</a></li>
+					href="<%=request.getContextPath()%>/member/memberList.wow">회원조회</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">
 						Dropdown <span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<%=request.getContextPath()%>/free/freeList.jsp">자유게시판
+						<li><a href="<%=request.getContextPath()%>/free/freeList.wow">자유게시판
 						</a></li>
 						<li><a href="#">자료실</a></li>
 						<li><a href="#">Q&A</a></li>

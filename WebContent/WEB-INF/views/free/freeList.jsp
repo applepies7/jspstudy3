@@ -48,30 +48,6 @@ function fn_recordCountPerPage_Change() {
 </script>
 </head>
 
-<jsp:useBean id="searchVO" class="com.study.free.vo.FreeSearchVO" />
-<jsp:setProperty property="*" name="searchVO" />
-
-<%
-	request.setCharacterEncoding("UTF-8");
-
-	IFreeBoardDao freeDao = new FreeBoardDaoOracle();
-	int rowCount = freeDao.getBoardCount(searchVO);
-	searchVO.setTotalRecordCount(rowCount);
-	searchVO.setting();
-
-	ICommonCodeDao codeDao = new CommonCodeDaoOracle();
-	List<CodeVO> a = codeDao.getCodeListByParent("BC00");
-	request.setAttribute("catList", a);
-
-	List<FreeBoardVO> list = freeDao.getBoardList(searchVO);
-	request.setAttribute("search", searchVO);
-	request.setAttribute("list", list);
-
-	System.out.println(searchVO);
-
-	//dup_key
-	//DUP_SUBMIT_PREVENT
-%>
 <body>
 	<%@include file="/WEB-INF/top_menu.jsp"%>
 
@@ -81,11 +57,11 @@ function fn_recordCountPerPage_Change() {
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<form name="frm_search" action="freeList.jsp" method="get"
+				<form name="frm_search" action="freeList.wow" method="get"
 					class="form-horizontal">
 					<input type="text" name="currentPageNo"
-						value="${searchVO.currentPageNo }"> <input type="text"
-						name="recordCountPerPage" value="${searchVO.recordCountPerPage }">
+						value="${search.currentPageNo }"> <input type="text"
+						name="recordCountPerPage" value="${search.recordCountPerPage }">
 					<div class="form-group">
 						<label for="id_searchType" class="col-sm-2 control-label">검색</label>
 						<div class="col-sm-2">
@@ -148,7 +124,7 @@ function fn_recordCountPerPage_Change() {
 
 			<div class="col-sm-2 col-sm-offset-7 text-right"
 				style="margin-bottom: 5px">
-				<a href="freeForm.jsp" class="btn btn-primary btn-default "> 글쓰기
+				<a href="freeForm.wow" class="btn btn-primary btn-default "> 글쓰기
 				</a>
 			</div>
 		</div>
@@ -175,13 +151,13 @@ function fn_recordCountPerPage_Change() {
 				<th class="text-center">조회수</th>
 			</tr>
 
-			<c:forEach items="${list}" var="vo">
+			<c:forEach items="${boardList}" var="vo">
 				<tr class="text-center">
 
 					<td>${vo.boNum}</td>
 					<td>${vo.boCatNm }</td>
 					<td class="text-left"><a
-						href="freeView.jsp?boNum=${vo.boNum }">${vo.boTitle}</a></td>
+						href="freeView.wow?boNum=${vo.boNum }">${vo.boTitle}</a></td>
 					<td>${vo.boWriter}</td>
 					<td>${vo.boRegDate}</td>
 					<td>${vo.boHit }</td>

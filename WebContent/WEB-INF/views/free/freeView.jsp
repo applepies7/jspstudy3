@@ -14,31 +14,6 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/top_menu.jsp"%>
-	<%
-	String s = request.getParameter("boNum");
-	int num   = Integer.parseInt(s);
-	IFreeBoardDao freeDao = new FreeBoardDaoOracle();
-	FreeBoardVO view = freeDao.getBoard(num);
-	if(view != null){
-	//글을 읽지 않았으면 조회수 증가
-	CookieBox box = new CookieBox(request);
-	String readBoard = box.getValue("free");
-	if (readBoard == null) readBoard = "";
-	String pat = "\\b"+ num +"\\b";
-	if(!Pattern.compile(pat).matcher(readBoard).find()){
-	freeDao.increaseHit(view.getBoNum());
-	Cookie cookie = CookieBox.createCookie("free", readBoard + num+"|");
-	response.addCookie(cookie);
-			}
-	}
-	request.setAttribute("view", view);
-	System.out.print(view);
-	// memberView.jsp 
-	// ${mem.memId}<sdsdf?>
-	// ${mem.memId}
-	// Find :  <input.+?name="(\w+)".+?>
-	// Repl : \${mem.$1}
-%>
 
 	<div class="container">
 		<h3>글 보기</h3>
@@ -89,10 +64,10 @@
 				<td colspan="4">
 					<div class="pull-left">
 
-						<a href="freeList.jsp" class="btn btn-sm btn-default">글 목록</a>
+						<a href="freeList.wow" class="btn btn-sm btn-default">글 목록</a>
 					</div>
 					<div class="pull-right">
-						<a href="freeEdit.jsp?boNum=${view.boNum}"
+						<a href="freeEdit.wow?boNum=${view.boNum}"
 							class="btn btn-sm btn-default">수정하기 </a>
 					</div>
 				</td>
