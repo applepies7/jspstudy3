@@ -210,7 +210,7 @@ function fn_recordCountPerPage_Change() {
 					end="${search.lastPageNoOnPageList }">
 					<c:if test="${search.currentPageNo eq i }">
 
-						<li class="page-item active"><a class="page-link" href="#"><span
+						<li class="page-item active"><a class="page-link" href="#" data-page="${i }"><span
 								class="page-link">${i }<span class="sr-only">(current)</span></span></a>
 					</c:if>
 					<c:if test="${search.currentPageNo ne i }">
