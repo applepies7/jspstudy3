@@ -64,11 +64,11 @@ table.grid th {
 							<select id="id_searchType" name="searchType"
 								class="form-control input-sm">
 								<option value="">-- 선택 --</option>
-								<option value="ID"
+								<option value="T"
 									${"ID" eq search.searchType ? 'selected="selected"' : ""}>ID</option>
-								<option value="NAME"
-									${"NAME" eq search.searchType ? 'selected="selected"' : ""}>이름</option>
-								<option value="ADD"
+								<option value="W"
+									${"W" eq search.searchType ? 'selected="selected"' : ""}>이름</option>
+								<option value="C"
 									${"ADD" eq search.searchType ? 'selected="selected"' : ""}>주소</option>
 							</select>
 						</div>
@@ -183,8 +183,8 @@ table.grid th {
 					end="${search.lastPageNoOnPageList }">
 					<c:if test="${search.currentPageNo eq i }">
 
-						<li class="page-item active"><a class="page-link" href="#"><span
-								class="page-link">${i }<span class="sr-only">(current)</span></span></a>
+						<li class="page-item active"><a class="page-link" href="#" data-page="${i }"><span
+								class="page-link">${i}<span class="sr-only">(current)</span></span></a>
 					</c:if>
 					<c:if test="${search.currentPageNo ne i }">
 
