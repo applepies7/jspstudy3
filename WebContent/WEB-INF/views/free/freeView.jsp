@@ -1,8 +1,4 @@
-<%@page import="java.util.regex.Pattern"%>
-<%@page import="com.study.util.CookieBox"%>
-<%@page import="com.study.free.vo.FreeBoardVO"%>
-<%@page import="com.study.free.dao.FreeBoardDaoOracle"%>
-<%@page import="com.study.free.dao.IFreeBoardDao"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

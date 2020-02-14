@@ -1,44 +1,16 @@
-<%@page import="java.util.UUID"%>
-<%@page import="com.study.common.vo.CodeVO"%>
-<%@page import="java.util.List"%>
-<%@page import="com.study.common.dao.ICommonCodeDao"%>
-<%@page import="com.study.common.dao.CommonCodeDaoOracle"%>
-<%@page import="com.study.free.vo.FreeBoardVO"%>
-<%@page import="com.study.free.dao.IFreeBoardDao"%>
-<%@page import="com.study.free.dao.FreeBoardDaoOracle"%>
-<%@page import="com.study.member.vo.MemberVO"%>
-<%@page import="com.study.member.dao.MemberDaoOracle"%>
-<%@page import="com.study.member.dao.IMemberDao"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<%request.setCharacterEncoding("Utf-8"); %>
 <%@include file="/WEB-INF/common_header.jsp"%>
 <title>글 등록</title>
 </head>
 <body>
 
-<%
-	//등록제한 유일키
-	String dupKey = UUID.randomUUID().toString();
-	session.setAttribute("DUP_SUBMIT_PREVENT",dupKey);
 
-	
-	
-	ICommonCodeDao codeDao = new CommonCodeDaoOracle();
-	List<CodeVO> a = codeDao.getCodeListByParent("BC00");
-	request.setAttribute("catList", a);
-	
-	//dup_key
-	//DUP_SUBMIT_PREVENT
-	
-	
- 	
-	
-%>
 	<%@include file="/WEB-INF/top_menu.jsp" %>
 	<div class="container">
 		<div class="page-header">
@@ -46,7 +18,7 @@
 		</div>
 		<div class="row" >
 		<form action="freeRegist.jsp" method="post">
-		<input type="hidden" name="dupKey" value="<%=dupKey%>">
+		<input type="hidden" name="dupKey" value="${dupKey}">
 		<table class="table table-striped table-bordered ">
 			<colgroup>
 				<col width="20%" />
