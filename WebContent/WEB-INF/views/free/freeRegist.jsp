@@ -6,9 +6,6 @@
 <html lang="ko">
 <head>
 <%@include file="/WEB-INF/common_header.jsp"%>
-<%
-	request.setCharacterEncoding("Utf-8");
-%>
 <meta charset="UTF-8">
 <title>freeRegist</title>
 </head>

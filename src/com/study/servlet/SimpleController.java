@@ -8,7 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.study.free.web.FreeDeleteController;
+import com.study.free.web.FreeEditController;
+import com.study.free.web.FreeFormController;
 import com.study.free.web.FreeListController;
+import com.study.free.web.FreeModifyController;
+import com.study.free.web.FreeRegistController;
 import com.study.free.web.FreeViewController;
 
 public class SimpleController extends HttpServlet {
@@ -37,7 +42,7 @@ public class SimpleController extends HttpServlet {
 		// uri : /board/list /board/view
 		// 2. 요청을 처리할 객체(모델)을 호출하여 실행 (서비스 DAO등....)
 		// 3. 객체(모델)를 통해 나온결과를 속성에 저장함.
-		// 4. 결과로 보여줄 뷰로 포워딩 jsp
+		// 4. 결과로 보여줄 jsp 뷰로 포워딩 
 		// free/list.wow = /WEB-INF/views/free/freeList.jsp
 		// free/view.wow?bonum12 = /WEB-INF/views/free/freeView.jsp
 
@@ -47,20 +52,34 @@ public class SimpleController extends HttpServlet {
 
 			if (uri.contains("/free/freeList.wow")) {
 				controller = new FreeListController();
-				view = controller.process(req, resp);
 			
 			} else if (uri.contains("/free/freeView.wow")) {
-	
 				controller = new FreeViewController();
-				view = controller.process(req, resp);
-
+			} else if (uri.contains("/free/freeForm.wow")) {
+				controller = new FreeFormController();
+			} else if (uri.contains("/free/freeEdit.wow")) {
+				controller = new FreeEditController();
+			} else if (uri.contains("/free/freeRegist.wow")) {
+				controller = new FreeRegistController();
+			} else if (uri.contains("/free/freeModify.wow")) {
+				controller = new FreeModifyController();
+			} else if (uri.contains("/free/freeDelete.wow")) {
+				controller = new FreeDeleteController();
 			} else {
 				resp.sendError(HttpServletResponse.SC_NOT_FOUND, "쉬어가염~");
 				return;
 			}
+			view = controller.process(req, resp);
+			if(view != null){
+				if(view.startsWith("redirect:")){
+					//
+				resp.sendRedirect( req.getContextPath() + view.substring("redirect:".length()) );
+				}else{
+			//view 포워드
 			RequestDispatcher dispatcher = req.getRequestDispatcher(view);
 			dispatcher.forward(req, resp);
-
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException(e.getMessage(), e);

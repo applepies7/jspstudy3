@@ -22,34 +22,15 @@
 <title>글 등록</title>
 </head>
 <body>
-	<%
-	//등록제한 유일키
-		String dupKey = UUID.randomUUID().toString();
-		session.setAttribute("DUP_SUBMIT_PREVENT",dupKey);
-
-	
-	
-	
-		ICommonCodeDao codeDao = new CommonCodeDaoOracle();
-		List<CodeVO> a = codeDao.getCodeListByParent("BC00");
-		request.setAttribute("catList", a);
-
-		String s = request.getParameter("boNum");
-		int num = Integer.parseInt(s);
-		IFreeBoardDao freeDao = new FreeBoardDaoOracle();
-		FreeBoardVO view = freeDao.getBoard(num);
-		request.setAttribute("view", view);
-		System.out.print(view);
-	%>
 	<%@include file="/WEB-INF/top_menu.jsp"%>
 	<div class="container">
 		<div class="page-header">
 			<h3>글 편집</h3>
 		</div>
 		<div class="row">
-			<form action="freeModify.jsp" id="id_form" method="post">
+			<form action="freeModify.wow" id="id_form" method="post">
 					<input type="hidden" name="boNum" value="${view.boNum}">
-					<input type="hidden" name="dupKey" value="<%=dupKey%>">
+					<input type="hidden" name="dupKey" value="${dupKey}">
 				<table class="table table-striped table-bordered ">
 					<colgroup>
 						<col width="20%" />
@@ -90,7 +71,7 @@
 						<td><select class="form-control" name="boCategory">
 								<option value="">-- 선택하세요--</option>
 								<c:forEach items="${catList}" var="vo">
-									<option value="${vo.commCd}" ${vo.commCd == view.boCategory ? 'selected="selected"' : ""}>${vo.commNm} ${vo.commCd}</option>
+									<option value="${vo.commCd}" ${vo.commCd == view.boCategory ? 'selected="selected"' : ""}>${vo.commNm}</option>
 								</c:forEach>
 						</select></td>
 					</tr>
@@ -109,7 +90,7 @@
 					
 						<td colspan="2">
 							<div class="pull-left">
-								<a href="freeList.jsp" class="btn btn-sm btn-default">목록으로</a>
+								<a href="freeList.wow" class="btn btn-sm btn-default">목록으로</a>
 							</div>
 							<div class="pull-right">
 								<button type="submit" class="btn btn-sm btn-primary">저장하기</button>
@@ -124,7 +105,7 @@
 	</div>
 <script>
 	function f_form(){
-	    document.getElementById("id_form").action = "freeDelete.jsp";
+	    document.getElementById("id_form").action = "freeDelete.wow";
 	    document.getElementById("id_form").submit();
 }
 </script>	

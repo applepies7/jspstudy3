@@ -17,7 +17,7 @@
 			<h3>글 등록</h3>
 		</div>
 		<div class="row" >
-		<form action="freeRegist.jsp" method="post">
+		<form action="freeRegist.wow" method="post">
 		<input type="hidden" name="dupKey" value="${dupKey}">
 		<table class="table table-striped table-bordered ">
 			<colgroup>
@@ -60,7 +60,7 @@
 			<tr>
 				<td colspan="2">
 						<div class="pull-left">
-							<a href="freeList.jsp" class="btn btn-sm btn-default">목록으로</a>
+							<a href="freeList.wow" class="btn btn-sm btn-default">목록으로</a>
 						</div>
 						<div class="pull-right">
 							<button type="submit" class="btn btn-sm btn-primary">저장하기</button>

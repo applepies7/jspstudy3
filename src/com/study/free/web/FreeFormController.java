@@ -10,8 +10,6 @@ import javax.servlet.http.HttpSession;
 import com.study.common.dao.CommonCodeDaoOracle;
 import com.study.common.dao.ICommonCodeDao;
 import com.study.common.vo.CodeVO;
-import com.study.free.dao.FreeBoardDaoOracle;
-import com.study.free.dao.IFreeBoardDao;
 import com.study.servlet.IController;
 
 public class FreeFormController implements IController {

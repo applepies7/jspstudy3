@@ -27,8 +27,8 @@
 		</div>
 		<%
 			IMemberDao memberDao = new MemberDaoOracle();
-			List<MemberVO> list = memberDao.getMemberList();
-			request.setAttribute("list", list);
+			//List<MemberVO> list = memberDao.getMemberList(memberDao);
+			//request.setAttribute("list", list);
 		%>
 		<table class="table table-striped table-bordered">
 			<colgroup>

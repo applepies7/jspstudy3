@@ -22,6 +22,7 @@ public class FreeViewController implements IController {
 		String s = req.getParameter("boNum");
 		int num = Integer.parseInt(s);
 		FreeBoardVO viewList = freeDao.getBoard(num);
+		System.out.println(viewList);
 		if (viewList != null) {
 			CookieBox box = new CookieBox(req);
 			String readBoard = box.getValue("free");

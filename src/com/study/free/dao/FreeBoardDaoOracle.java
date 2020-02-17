@@ -34,6 +34,7 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 			sb.append("   a.bo_title, ");
 			sb.append("   a.bo_writer, ");
 			sb.append("   to_char(a.bo_reg_date,'YYYY.MM.DD') as reg_date, ");
+			sb.append("   to_char(a.bo_mod_date,'YYYY.MM.DD') as mod_date, ");
 			sb.append("   a.bo_hit ");
 			sb.append("  FROM free_board a left join comm_code b	 ");
 			sb.append("    on( a.bo_category = b.comm_cd)	 ");
@@ -88,6 +89,7 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 				board.setBoTitle(rs.getString("bo_title"));
 				board.setBoWriter(rs.getString("bo_writer"));
 				board.setBoRegDate(rs.getString("reg_date"));
+				board.setBoModDate(rs.getString("mod_date"));
 				board.setBoHit(rs.getInt("bo_hit"));
 				list.add(board);
 			}
