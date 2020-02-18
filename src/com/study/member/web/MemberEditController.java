@@ -1,4 +1,4 @@
-package com.study.free.web;
+package com.study.member.web;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,7 +15,7 @@ import com.study.free.dao.IFreeBoardDao;
 import com.study.free.vo.FreeBoardVO;
 import com.study.servlet.IController;
 
-public class FreeEditController implements IController {
+public class MemberEditController implements IController {
 private IFreeBoardDao freeDao =  new FreeBoardDaoOracle();
 private ICommonCodeDao codeDao =  new CommonCodeDaoOracle();
 	

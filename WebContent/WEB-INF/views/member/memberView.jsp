@@ -12,17 +12,6 @@
   </head>
 <body>
 <%@include file="/WEB-INF/top_menu.jsp"%>
-<%
-	String id = request.getParameter("memId");
-	IMemberDao memberDao = new MemberDaoOracle();
-	MemberVO mem = memberDao.getMember(id);
-	request.setAttribute("mem", mem);
-	// memberView.jsp 
-	// ${mem.memId}<sdsdf?>
-	// ${mem.memId}
-	// Find :  <input.+?name="(\w+)".+?>
-	// Repl : \${mem.$1}
-%>
 
 <div class="container">
 <h3>회원 상세 보기</h3>
@@ -82,10 +71,10 @@
 		<td colspan="4">
 		<div class="pull-left">
 		
-			<a href="memberList.jsp" class="btn btn-sm btn-default">회원 목록</a>
+			<a href="memberList.wow" class="btn btn-sm btn-default">회원 목록</a>
 		</div>
 		<div class="pull-right">
-			<a href="memberEdit.jsp?memId=${mem.memId}" class="btn btn-sm btn-default">수정하기
+			<a href="memberEdit.wow?memId=${mem.memId}" class="btn btn-sm btn-default">수정하기
 			<%-- <%=request.getParameter("memId")%> ${param.memId} --%>
 			</a>
 		</div>

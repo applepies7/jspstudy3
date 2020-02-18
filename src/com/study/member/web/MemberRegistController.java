@@ -1,4 +1,4 @@
-package com.study.free.web;
+package com.study.member.web;
 
 import java.net.URLDecoder;
 
@@ -16,7 +16,7 @@ import com.study.free.dao.IFreeBoardDao;
 import com.study.free.vo.FreeBoardVO;
 import com.study.servlet.IController;
 
-public class FreeRegistController implements IController {
+public class MemberRegistController implements IController {
 	private IFreeBoardDao freeDao = new FreeBoardDaoOracle();
 	private ICommonCodeDao codeDao = new CommonCodeDaoOracle();
 

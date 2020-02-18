@@ -1,11 +1,4 @@
-<%@page import="java.util.List"%>
-<%@page import="com.study.common.vo.CodeVO"%>
-<%@page import="com.study.common.dao.CommonCodeDaoOracle"%>
-<%@page import="com.study.common.dao.ICommonCodeDao"%>
-<%@page import="com.study.member.vo.MemberVO"%>
-<%@page import="com.study.member.vo.MemberSearchVO"%>
-<%@page import="com.study.member.dao.MemberDaoOracle"%>
-<%@page import="com.study.member.dao.IMemberDao"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -21,30 +14,7 @@ table.grid th {
 	text-align: center;
 }
 </style>
-	<jsp:useBean id="searchVO" class="com.study.member.vo.MemberSearchVO" />
-	<jsp:setProperty property="*" name="searchVO" />
-	<%
-	request.setCharacterEncoding("UTF-8");
-
-	IMemberDao memberDao = new MemberDaoOracle();
-	int rowCount = memberDao.getMemberCount(searchVO);
-	searchVO.setTotalRecordCount(rowCount);
-	searchVO.setting();
-
-	ICommonCodeDao codeDao = new CommonCodeDaoOracle();
-	List<CodeVO> a = codeDao.getCodeListByParent("JB00");
-	request.setAttribute("catList", a);
-
-	List<MemberVO> list = memberDao.getMemberList(searchVO);
-	request.setAttribute("search", searchVO);
-	request.setAttribute("list", list);
-
-	System.out.println(searchVO);
-
-	//dup_key
-	//DUP_SUBMIT_PREVENT
-%>
-	
+		
 <body>
 	<%@include file="/WEB-INF/top_menu.jsp"%>
 	<div class="container">
@@ -53,7 +23,7 @@ table.grid th {
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<form name="frm_search" action="memberList.jsp" method="get"
+				<form name="frm_search" action="memberList.wow" method="get"
 					class="form-horizontal">
 					<input type="text" name="currentPageNo"
 						value="${searchVO.currentPageNo }"> <input type="text"
@@ -121,7 +91,7 @@ table.grid th {
 
 			<div class="col-sm-2 col-sm-offset-7 text-right"
 				style="margin-bottom: 5px">
-				<a href="memberForm.jsp" class="btn btn-primary btn-default "> 글쓰기
+				<a href="memberForm.wow" class="btn btn-primary btn-default "> 글쓰기
 				</a>
 			</div>
 		</div>
@@ -150,7 +120,7 @@ table.grid th {
 				<tr>
 
 					<td>${st.count}</td>
-					<td><a href="memberView.jsp?memId=${vo.memId}">${vo.memId}</a></td>
+					<td><a href="memberView.wow?memId=${vo.memId}">${vo.memId}</a></td>
 					<td>${vo.memName}</td>
 					<td>${vo.memAdd1}${vo.memAdd2 }</td>
 					<td>${vo.memJobnm }</td>

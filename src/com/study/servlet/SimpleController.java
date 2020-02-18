@@ -57,10 +57,10 @@ public class SimpleController extends HttpServlet {
 				controller = new FreeViewController();
 			} else if (uri.contains("/free/freeForm.wow")) {
 				controller = new FreeFormController();
-			} else if (uri.contains("/free/freeEdit.wow")) {
-				controller = new FreeEditController();
 			} else if (uri.contains("/free/freeRegist.wow")) {
 				controller = new FreeRegistController();
+			} else if (uri.contains("/free/freeEdit.wow")) {
+				controller = new FreeEditController();
 			} else if (uri.contains("/free/freeModify.wow")) {
 				controller = new FreeModifyController();
 			} else if (uri.contains("/free/freeDelete.wow")) {

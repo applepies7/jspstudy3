@@ -1,4 +1,4 @@
-package com.study.free.web;
+package com.study.member.web;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ import com.study.free.dao.IFreeBoardDao;
 import com.study.free.vo.FreeBoardVO;
 import com.study.servlet.IController;
 
-public class FreeDeleteController implements IController {
+public class MemberDeleteController implements IController {
 	private IFreeBoardDao freeDao = new FreeBoardDaoOracle();
 	private ICommonCodeDao codeDao = new CommonCodeDaoOracle();
 

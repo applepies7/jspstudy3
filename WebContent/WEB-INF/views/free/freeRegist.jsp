@@ -16,37 +16,14 @@
 		<jsp:setProperty property="*" name="free" />
 
 		<c:catch var="ex">
-			<%
-				String pDupKey = request.getParameter("dupKey");
-					String sDupKey = (String) session.getAttribute("DUP_SUBMIT_PREVENT");
-
-					if (pDupKey == null || pDupKey.isEmpty()) {
-						response.sendRedirect(request.getContextPath() + "/");
-						return;
-					} else {
-						if (sDupKey == null || !sDupKey.equals(pDupKey)) {
-			%>
-			<div>다시써!</div>
+						<div>다시써!</div>
 			<div>
 				<a href="freeList.jsp" class="btn btn-sm btn-default">글목록으로</a>
 			</div>
 			<div>
 				<a href="freeForm.jsp" class="btn btn-sm btn-info">다시쓰러 가기~</a>
 			</div>
-			<%
-				return;
-						}
-					}
-			%>
-			<%
-				IFreeBoardDao freeDao = new FreeBoardDaoOracle();
-					free.setBoIp(request.getRemoteAddr());
-					int res = freeDao.insertBoard(free);
-					request.setAttribute("res", res);
-			%>
-
-
-
+			
 
 
 
