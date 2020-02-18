@@ -166,9 +166,9 @@ public class MemberDaoOracle implements IMemberDao {
 				if(searchVO.getSearchType().equals("ADD")) {
 						pstmt.setString(idx++, searchVO.getSearchWord());
 						pstmt.setString(idx++, searchVO.getSearchWord());
-				}
+				}else {
 				pstmt.setString(idx++, searchVO.getSearchWord());
-				
+				}
 			}
 
 			if (StringUtils.isNotBlank(searchVO.getSearchJob())) {
