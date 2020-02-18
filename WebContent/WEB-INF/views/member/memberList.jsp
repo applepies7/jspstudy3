@@ -25,8 +25,8 @@ table.grid th {
 			<div class="panel-body">
 				<form name="frm_search" action="memberList.wow" method="get"
 					class="form-horizontal">
-					<input type="text" name="currentPageNo"
-						value="${searchVO.currentPageNo }"> <input type="text"
+					<input type="hidden" name="currentPageNo"
+						value="${searchVO.currentPageNo }"> <input type="hidden"
 						name="recordCountPerPage" value="${searchVO.recordCountPerPage }">
 					<div class="form-group">
 						<label for="id_searchType" class="col-sm-2 control-label">검색</label>
