@@ -1,10 +1,3 @@
-<%@page import="com.study.member.vo.MemberVO"%>
-<%@page import="com.study.member.dao.MemberDaoOracle"%>
-<%@page import="com.study.member.dao.IMemberDao"%>
-<%@page import="com.study.common.dao.CommonCodeDaoOracle"%>
-<%@page import="com.study.common.vo.CodeVO"%>
-<%@page import="java.util.List"%>
-<%@page import="com.study.common.dao.ICommonCodeDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -12,37 +5,18 @@
 <html lang="ko">
   <head>
   	<%@include file="/WEB-INF/common_header.jsp" %>
-  	<%request.setCharacterEncoding("Utf-8"); %>
+  	<%%>
   	<title>회원수정</title>
   </head>
 <body>
 <%@include file="/WEB-INF/top_menu.jsp"%>
-<%
-String id = request.getParameter("memId");
-IMemberDao memberDao = new MemberDaoOracle();
-MemberVO mem = memberDao.getMember(id);
-request.setAttribute("mem", mem);
-
-
-ICommonCodeDao codeDao = new CommonCodeDaoOracle();
-List<CodeVO> a  = codeDao.getCodeListByParent("JB00");
-List<CodeVO> b  = codeDao.getCodeListByParent("HB00");
-
-request.setAttribute("jobs", a);
-request.setAttribute("likes", b);
-System.out.println(a);
-System.out.println(b);
-
-
-
-%>
 
 <div class="container">
 <h3>회원 수정</h3>
 
 
 
-<form id ="id-form" action="memberModify.jsp" method="post">
+<form id ="id-form" action="memberModify.wow" method="post">
 
 
 <table class="table table-bordered">
@@ -114,7 +88,7 @@ System.out.println(b);
 	</tr>	
 	<tr>
 		<td colspan="4">
-			<a href="memberList.jsp" class="btn btn-sm btn-default">회원 목록</a>
+			<a href="memberList.wow" class="btn btn-sm btn-default">회원 목록</a>
 			<button type="submit"  class="btn btn-sm btn-success" name="action" >변경</button>
 			<button type="submit" id="btn-delete" class="btn btn-sm btn-success" name="action" >삭제</button>
 		</td>
@@ -124,21 +98,21 @@ System.out.println(b);
 </div>
 <script>
 function f_form(){
-	    document.getElementById("id_form").action = "memberDelete.jsp";
+	    document.getElementById("id_form").action = "memberDelete.wow";
 	    document.getElementById("id_form").submit();
 }
 
 var fn_frm_submit=function(e) {
 	e.preventDefault(); //이벤트 전파방지
 	var f = document.forms["id-form"];
-	f.action = "memberModify.jsp";
+	f.action = "memberModify.wow";
 	f.submit();
 	
 }
 var fn_frm_delete_click=function(e) {
 	e.preventDefault(); //이벤트 전파방지
 	var f = document.forms["id-form"];
-	f.action = "memberDelete.jsp";
+	f.action = "memberDelete.wow";
 	f.submit();
 	
 }

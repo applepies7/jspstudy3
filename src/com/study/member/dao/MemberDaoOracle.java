@@ -42,7 +42,7 @@ public class MemberDaoOracle implements IMemberDao {
 					sb.append("  and mem_name like '%'|| ? ||'%'  ");
 					break;
 				case "ADD":
-					sb.append("  and (mem_add1 like '%'|| ? ||'%' or mem_add2 like '%'|| ? ||'%'  ");
+					sb.append("  and (mem_add1 like '%'|| ? ||'%' or mem_add2 like '%'|| ? ||'%')  ");
 					break;
 				}
 			}
@@ -59,9 +59,9 @@ public class MemberDaoOracle implements IMemberDao {
 				if(searchVO.getSearchType().equals("ADD")) {
 						pstmt.setString(idx++, searchVO.getSearchWord());
 						pstmt.setString(idx++, searchVO.getSearchWord());
-				}
+				}else {
 				pstmt.setString(idx++, searchVO.getSearchWord());
-				
+				}
 			}
 
 			if (StringUtils.isNotBlank(searchVO.getSearchJob())) {
@@ -138,7 +138,7 @@ public class MemberDaoOracle implements IMemberDao {
 					sb.append("  and mem_name like '%'|| ? ||'%'  ");
 					break;
 				case "ADD":
-					sb.append("  and (mem_add1 like '%'|| ? ||'%' or mem_add2 like '%'|| ? ||'%'  ");
+					sb.append("  and (mem_add1 like '%'|| ? ||'%' or mem_add2 like '%'|| ? ||'%' ) ");
 					break;
 
 				}

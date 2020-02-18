@@ -1,9 +1,6 @@
-<%@page import="com.study.member.dao.MemberDaoOracle"%>
-<%@page import="com.study.member.dao.IMemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%request.setCharacterEncoding("Utf-8"); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,15 +11,7 @@
 <body>
 	<%@include file="/WEB-INF/top_menu.jsp"%>
 	<div class="container">
-		<jsp:useBean id="member" class="com.study.member.vo.MemberVO" />
-		<jsp:setProperty property="*" name="member" />
-	
 		<c:catch var="ex">
-			<%
-				IMemberDao memberDao = new MemberDaoOracle();
-				int res = memberDao.deleteMember(member);
-				request.setAttribute("res", res);
-			%>
 			
 			<c:if test="${res > 0}">
 				<div>삭제 성공</div>

@@ -29,7 +29,6 @@ public class StudyController extends HttpServlet {
 	private static final long serialVersionUID = 3184356295960934899L;
 
 	private Map<String, IController> controllerMap = new HashMap<String, IController>();
-
 	// 서블릿의 초기화 메서드(init)에서 프로퍼티를 읽어 객체 생성 후 맵에 저장하기
 	@Override
 	public void init() throws ServletException {
@@ -64,6 +63,7 @@ public class StudyController extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 요청 처리 전 공통적인 기능이 필요하면 기술한다.
 		// 2. 요청을 분석한다.
+		req.setCharacterEncoding("Utf-8"); 
 		String uri = req.getRequestURI();// study3/free
 		uri = uri.substring(req.getContextPath().length());
 		System.out.printf("요청 URI = %s\n", uri);

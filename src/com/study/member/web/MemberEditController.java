@@ -1,41 +1,38 @@
 package com.study.member.web;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.study.common.dao.CommonCodeDaoOracle;
 import com.study.common.dao.ICommonCodeDao;
 import com.study.common.vo.CodeVO;
-import com.study.free.dao.FreeBoardDaoOracle;
-import com.study.free.dao.IFreeBoardDao;
-import com.study.free.vo.FreeBoardVO;
+import com.study.member.dao.IMemberDao;
+import com.study.member.dao.MemberDaoOracle;
+import com.study.member.vo.MemberVO;
 import com.study.servlet.IController;
 
 public class MemberEditController implements IController {
-private IFreeBoardDao freeDao =  new FreeBoardDaoOracle();
+private	IMemberDao memberDao = new MemberDaoOracle();
 private ICommonCodeDao codeDao =  new CommonCodeDaoOracle();
 	
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		HttpSession session = req.getSession();
-		String dupKey = UUID.randomUUID().toString();
-		session.setAttribute("DUP_SUBMIT_PREVENT",dupKey);
-		List<CodeVO> a = codeDao.getCodeListByParent("BC00");
-		req.setAttribute("catList", a);
-		req.setAttribute("dupKey", dupKey);
 
-		String s = req.getParameter("boNum");
-		int num = Integer.parseInt(s);
-		FreeBoardVO view = freeDao.getBoard(num);
-		req.setAttribute("view", view);
-		System.out.print(view);
+		String id = req.getParameter("memId");
+		MemberVO mem = memberDao.getMember(id);
+		req.setAttribute("mem", mem);
+		List<CodeVO> a  = codeDao.getCodeListByParent("JB00");
+		List<CodeVO> b  = codeDao.getCodeListByParent("HB00");
 
-		return "/WEB-INF/views/free/freeEdit.jsp";
+		req.setAttribute("jobs", a);
+		req.setAttribute("likes", b);
+		System.out.println(a);
+		System.out.println(b);
+		
+			return "/WEB-INF/views/member/memberEdit.jsp";
 	}
 
 	
