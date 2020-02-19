@@ -19,7 +19,7 @@ table.grid th {
 	<%@include file="/WEB-INF/top_menu.jsp"%>
 	<div class="container">
 			<div class="page-header">
-			<h3>글 목록</h3>
+			<h3>회원 목록</h3>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-body">
@@ -91,7 +91,7 @@ table.grid th {
 
 			<div class="col-sm-2 col-sm-offset-7 text-right"
 				style="margin-bottom: 5px">
-				<a href="memberForm.wow" class="btn btn-primary btn-default "> 글쓰기
+				<a href="memberForm.wow" class="btn btn-primary btn-default "> 사용자등록
 				</a>
 			</div>
 		</div>

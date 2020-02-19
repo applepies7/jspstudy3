@@ -32,7 +32,7 @@ private ICommonCodeDao codeDao =  new CommonCodeDaoOracle();
 		
 	 	
 		
-		return "/WEB-INF/views/free/freeForm.jsp";
+		return "/WEB-INF/views/member/memberForm.jsp";
 	}
 
 	

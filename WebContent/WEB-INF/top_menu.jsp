@@ -38,7 +38,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<c:if test="${empty sessionScope.USER_INFO}">
-					<li><a href="<%=request.getContextPath()%>/login/login.jsp"><i
+					<li><a href="<%=request.getContextPath()%>/login/login.wow"><i
 							class="fa fa-sign-in" aria-hidden="true"> </i> 로그인 </a></li>
 				</c:if>
 				<c:if test="${not empty sessionScope.USER_INFO}">
@@ -48,14 +48,14 @@
 					</a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a
-								href="<%=request.getContextPath()%>/member/member.view?memName=${sessionScope.USER_INFO.userName}"> <i
+								href="<%=request.getContextPath()%>/member/memberView.wow?memName=${sessionScope.USER_INFO.userName}"> <i
 									class="fa fa-cog" aria-hidden="true"> </i> 회원정보
 							</a></li>
 							<li><a href="#"> <i class="fa fa-calendar"
 									aria-hidden="true"> </i> 일정관리
 							</a></li>
 							<li class="divider"></li>
-							<li><a href="<%=request.getContextPath()%>/login/logout.jsp"
+							<li><a href="<%=request.getContextPath()%>/login/logout.wow"
 								class="pull-left"> <i class="fa fa-sign-out"
 									aria-hidden="true"> </i>로그아웃
 							</a></li>

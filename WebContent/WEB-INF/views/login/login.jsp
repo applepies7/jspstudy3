@@ -1,5 +1,3 @@
-<%@page import="com.study.member.dao.MemberDaoOracle"%>
-<%@page import="com.study.member.dao.IMemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -10,7 +8,7 @@
 <html lang="ko">
 <head>
 	<%@include file="/WEB-INF/common_header.jsp" %>
-	<title>/member/memberRegist.jsp </title>
+	<title>loginForm </title>
 
 <style type="text/css">
 
@@ -73,7 +71,7 @@
 <%@include file="/WEB-INF/top_menu.jsp" %>
 <div class="container">
 <div class="login-form">
-    <form action="<%=request.getContextPath()%>/login/loginCheck.jsp" method="post">
+    <form action="<%=request.getContextPath()%>/login/loginCheck.wow" method="post">
         <h2 class="text-center">로그인</h2>   
         <div class="form-group">
         	<div class="input-group">
@@ -96,7 +94,7 @@
         </div>
 		<div class="or-seperator"></div>      
     </form>
-    <p class="text-center text-muted small">아직 회원이 아니십니까? <a href="<%=request.getContextPath()%>/member/memberForm.jsp">회원가입</a></p>
+    <p class="text-center text-muted small">아직 회원이 아니십니까? <a href="<%=request.getContextPath()%>/member/memberForm.wow">회원가입</a></p>
 </div>
 </div>
 </body>

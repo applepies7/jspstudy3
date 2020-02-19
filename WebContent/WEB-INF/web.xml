@@ -42,11 +42,34 @@
 	<filter-class>com.study.filter.LoggingFilter</filter-class>
 	</filter>
 	
+	<filter>
+	<filter-name>loginCheck</filter-name>
+	<filter-class>com.study.filter.LoginCheckFilter</filter-class>
+	</filter>
+	
+	<filter>
+	<filter-name>IpCheck</filter-name>
+	<filter-class>com.study.filter.IpCheckFilter</filter-class>
+	</filter>
+	
+	<!-- <filter-mapping>은 순서대로 등록됨, -->
+	
+	 
+	 
 	<filter-mapping>
 	<filter-name>logging</filter-name>
 	<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	 
+
+	<filter-mapping>
+	<filter-name>IpCheck</filter-name>
+	<url-pattern>*.wow</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+	<filter-name>loginCheck</filter-name>
+	<url-pattern>*.wow</url-pattern>
+	</filter-mapping>
 	<!-- 
 	
 	<servlet>
