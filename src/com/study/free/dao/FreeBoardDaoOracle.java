@@ -154,9 +154,9 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 
 			rs = pstmt.executeQuery();
 
-			FreeBoardVO board = new FreeBoardVO();
-			while (rs.next()) {
-
+			FreeBoardVO board = null;
+			if (rs.next()) {
+				board = new FreeBoardVO();
 				board.setBoNum(rs.getInt("bo_num"));
 				board.setBoCategory(rs.getString("bo_category"));
 				board.setBoCatNm(rs.getString("cat_nm"));

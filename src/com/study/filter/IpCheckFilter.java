@@ -24,12 +24,12 @@ public class IpCheckFilter implements Filter {
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// "A"ccess , "D"enied
 		accessMap = new HashMap<String, String>();
-//		accessMap.put("192.168.20.46", "A");
-//accessMap.put("0:0:0:0:0:0:0:1", "D");
-//		accessMap.put("127.0.0.1", "A");
+		accessMap.put("192.168.20.46", "A");
+		accessMap.put("0:0:0:0:0:0:0:1", "A");
+		accessMap.put("127.0.0.1", "A");
 		accessMap.put("192.168.20.37", "A");
-		accessMap.put("192.168.20.36", "D");
-		accessMap.put("192.168.20.32", "D");
+		accessMap.put("192.168.20.36", "A");
+		accessMap.put("192.168.20.32", "A");
 	}
 
 	@Override
@@ -59,6 +59,7 @@ public class IpCheckFilter implements Filter {
 
 	@Override
 	public void destroy() {
+		accessMap = null;
 
 	}
 

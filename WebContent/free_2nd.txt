@@ -28,7 +28,51 @@ FreeModifyController
  
 
 
+34일차
 
 
 
-         
+35일차
+---------------
+예외 BizException -> RuntimeException 
+	+BizDuplicateException : 중복키 에러
+	+BizNotFoundException : 조회에러
+	+BizAuthenticationException : 인증 에러
+ 	+BizNotEffectedException :
+
+	DAO :
+		Create : insertXxx
+		Read :getXxx, getXxxList
+		Update : updateXx
+		Delete :deleteXxxx
+
+	Service
+		등록 : registXxxx
+		수정 : modifyXxxx
+		조회 : getxxxx, getxxxList
+		삭제 : removeXxxx
+	
+	Controller
+	
+	예외만 수정
+	IFreeBoardService
+	+freeVoardService
+	
+	중간개인프로젝트
+	
+회원가입주소 검색 카카오 api이용
+자유게시판 에디터 붙이기
+
+1:1 qna등 문의 게시판
+계층형 게시판
+
+
+
+
+	
+	
+	
+	
+	
+	
+	

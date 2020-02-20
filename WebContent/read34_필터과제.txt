@@ -34,12 +34,27 @@ public class IpCheckFilter implements Filter {
 	
 	/* 문제 : doFileter 를 오버라이드 하여 
 	   유형 [A] : 자원에 접근 처리 
-	        [D] : 다음과 같은 메시지 처리
-	              title: 접근 거부 
-	              message : 해당 IP : 192.168.20.d는 거부된 아이피입니다.
-	                        문의사항이 있는 경우 042-719-8850으로 연락주세요 
-	        [존재하지 않는 경우]
+	     [D] : 다음과 같은 메시지 처리
+	           title: 접근 거부 
+	           message : 해당 IP : 192.168.20.d는 거부된 아이피입니다.
+	                      문의사항이 있는 경우 042-719-8850으로 연락주세요 
+	         [존재하지 않는 경우]
 	             : 무조건 "/" 로 리다이렉트   
+	              	
+     filter-mapping 
+       *.wow 
+     순서는 logging -> ipCheck -> loginCheck   	             
+	                
 	 */       
 	              	
 }
+
+과제 :
+ 예외처리가이드 
+  https://www.slideshare.net/dhrim/ss-2804901
+
+ 토비의 예외처리 (실제 토비사이트 아님)      
+  https://jongmin92.github.io/2018/04/04/Spring/toby-4/   
+  
+    
+

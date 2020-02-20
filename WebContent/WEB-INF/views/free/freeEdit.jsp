@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 <%@include file="/WEB-INF/common_header.jsp"%>
 <title>글 등록</title>
 </head>
@@ -68,7 +69,7 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea class="form-control" rows="3" name="boContent">${view.boContent }</textarea>
+						<td><textarea class="form-control" id="editor" rows="10" cols="80" name="boContent">${view.boContent }</textarea>
 						</td>
 					</tr>
 					
@@ -89,12 +90,14 @@
 		</div>
 
 	</div>
-<script>
-	function f_form(){
-	    document.getElementById("id_form").action = "freeDelete.wow";
-	    document.getElementById("id_form").submit();
-}
-</script>	
+	<script>
+		CKEDITOR.replace('editor');
+		function f_form() {
+			document.getElementById("id_form").action = "freeDelete.wow";
+			document.getElementById("id_form").submit();
+		}
+		
+	</script>
 </body>
 </html>
 

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 <%@include file="/WEB-INF/common_header.jsp"%>
 <title>회원가입</title>
 </head>
@@ -46,7 +47,8 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td>${view.boContent}</td>
+				<td><textarea id="editor" rows="10" cols="80">
+                ${view.boContent}</textarea></td>
 			</tr>
 			<tr>
 				<th>작성일</th>
@@ -70,6 +72,12 @@
 			</tr>
 		</table>
 	</div>
+		<script>
+		 CKEDITOR.replace( 'editor',{
+			 readOnly : true
+			 
+		 } );
+	</script>
 </body>
 </html>
 
