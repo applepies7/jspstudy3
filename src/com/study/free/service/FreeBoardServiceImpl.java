@@ -73,11 +73,11 @@ public class FreeBoardServiceImpl implements IFreeBoardService {
 
 	@Override
 	public void increaseHit(int boNum) throws BizException {
-		try {
-			freeDao.increaseHit(boNum);
-		} catch (SQLException e) {
-			throw new BizException(e);
-		}
+//		try {
+//			freeDao.increaseHit(boNum);
+//		} catch (SQLException e) {
+//			throw new BizException(e);
+//		}
 	}
 
 }
