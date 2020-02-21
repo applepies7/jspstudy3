@@ -74,8 +74,7 @@
 	</div>
 		<script>
 		 CKEDITOR.replace( 'editor',{
-			 readOnly : true
-			 
+			 readOnly : true			 
 		 } );
 	</script>
 </body>
