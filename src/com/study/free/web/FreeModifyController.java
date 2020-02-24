@@ -36,7 +36,7 @@ private ICommonCodeDao codeDao =  new CommonCodeDaoOracle();
 		} catch (BizDuplicateException e) {
 		ResultMessageVO message = new ResultMessageVO();
 		message.setResult(false)
-				.setTitle("등록 실패")
+				.setTitle("수정 실패")
 				.setMessage("등록 실패 했음.... 중복된 글입니다. ").setUrl("/free/freeList.wow")
 				.setUrlTitle("목록으로");
 		req.setAttribute("resultMessage", message);

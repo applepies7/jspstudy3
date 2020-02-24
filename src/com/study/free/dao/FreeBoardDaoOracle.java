@@ -270,8 +270,8 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 			sb.append(" set 					 ");
 			sb.append("    bo_title    = ?   ");
 			sb.append("    ,bo_category = ? ");
-			sb.append("    ,bo_writer   = ? ");
-			sb.append("    ,bo_pass     = ? ");
+			//sb.append("    ,bo_writer   = ? ");
+			//sb.append("    ,bo_pass     = ? ");
 			sb.append("    ,bo_content  = ? ");
 			sb.append("    ,bo_mod_date = sysdate ");
 			sb.append(" where bo_num = ? ");
@@ -283,8 +283,8 @@ public class FreeBoardDaoOracle implements IFreeBoardDao {
 
 			pstmt.setString(idx++, board.getBoTitle());
 			pstmt.setString(idx++, board.getBoCategory());
-			pstmt.setString(idx++, board.getBoWriter());
-			pstmt.setString(idx++, board.getBoPass());
+			//pstmt.setString(idx++, board.getBoWriter());
+			//pstmt.setString(idx++, board.getBoPass());
 			pstmt.setString(idx++, board.getBoContent());
 			pstmt.setInt(idx++, board.getBoNum());
 			pstmt.setString(idx++, board.getBoPass());
