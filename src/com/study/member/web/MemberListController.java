@@ -38,7 +38,7 @@ private ICommonCodeDao codeDao =  new CommonCodeDaoOracle();
 		req.setAttribute("list", list);
 		req.setAttribute("catList", a);
 
-		System.out.println(searchVO);
+		//System.out.println(searchVO);
 
 		
 		return "/WEB-INF/views/member/memberList.jsp";
